@@ -1,0 +1,84 @@
+diff --git a/Makefile.in b/Makefile.in
+index 32c5403..c965883 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -274,7 +274,7 @@ BUILD_PREFIX_1 = @BUILD_PREFIX_1@
+ 
+ # Flags to pass to stage2 and later makes.  They are defined
+ # here so that they can be overridden by Makefile fragments.
+-BOOT_CFLAGS= -g -O2
++BOOT_CFLAGS= -O2
+ BOOT_LDFLAGS=
+ 
+ BISON = @BISON@
+@@ -379,11 +379,11 @@ COMPILER_NM_FOR_TARGET=@COMPILER_NM_FOR_TARGET@
+ # We want to ensure that TARGET libraries (which we know are built with
+ # gcc) are built with "-O2 -g", so prepend those options when setting
+ # CFLAGS_FOR_TARGET and CXXFLAGS_FOR_TARGET.
+-CFLAGS_FOR_TARGET = -O2 -g $(CFLAGS) $(SYSROOT_CFLAGS_FOR_TARGET) \
+-	$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
++CFLAGS_FOR_TARGET = -O2 $(SYSROOT_CFLAGS_FOR_TARGET) \
++			$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
+ SYSROOT_CFLAGS_FOR_TARGET = @SYSROOT_CFLAGS_FOR_TARGET@
+ DEBUG_PREFIX_CFLAGS_FOR_TARGET = @DEBUG_PREFIX_CFLAGS_FOR_TARGET@
+-CXXFLAGS_FOR_TARGET = -O2 -g $(CXXFLAGS) $(SYSROOT_CFLAGS_FOR_TARGET) \
++CXXFLAGS_FOR_TARGET = -O2 $(SYSROOT_CFLAGS_FOR_TARGET) \
+ 	$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
+ LIBCFLAGS_FOR_TARGET = $(CFLAGS_FOR_TARGET)
+ LIBCXXFLAGS_FOR_TARGET = $(CXXFLAGS_FOR_TARGET) -fno-implicit-templates
+diff --git a/Makefile.tpl b/Makefile.tpl
+index 12ad2a1..f011092 100644
+--- a/Makefile.tpl
++++ b/Makefile.tpl
+@@ -277,7 +277,7 @@ BUILD_PREFIX_1 = @BUILD_PREFIX_1@
+ 
+ # Flags to pass to stage2 and later makes.  They are defined
+ # here so that they can be overridden by Makefile fragments.
+-BOOT_CFLAGS= -g -O2
++BOOT_CFLAGS= -O2
+ BOOT_LDFLAGS=
+ 
+ BISON = @BISON@
+@@ -382,11 +382,11 @@ COMPILER_NM_FOR_TARGET=@COMPILER_NM_FOR_TARGET@
+ # We want to ensure that TARGET libraries (which we know are built with
+ # gcc) are built with "-O2 -g", so prepend those options when setting
+ # CFLAGS_FOR_TARGET and CXXFLAGS_FOR_TARGET.
+-CFLAGS_FOR_TARGET = -O2 -g $(CFLAGS) $(SYSROOT_CFLAGS_FOR_TARGET) \
+-	$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
++CFLAGS_FOR_TARGET = -O2 $(SYSROOT_CFLAGS_FOR_TARGET) \
++			$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
+ SYSROOT_CFLAGS_FOR_TARGET = @SYSROOT_CFLAGS_FOR_TARGET@
+ DEBUG_PREFIX_CFLAGS_FOR_TARGET = @DEBUG_PREFIX_CFLAGS_FOR_TARGET@
+-CXXFLAGS_FOR_TARGET = -O2 -g $(CXXFLAGS) $(SYSROOT_CFLAGS_FOR_TARGET) \
++CXXFLAGS_FOR_TARGET = -O2 $(SYSROOT_CFLAGS_FOR_TARGET) \
+ 	$(DEBUG_PREFIX_CFLAGS_FOR_TARGET)
+ LIBCFLAGS_FOR_TARGET = $(CFLAGS_FOR_TARGET)
+ LIBCXXFLAGS_FOR_TARGET = $(CXXFLAGS_FOR_TARGET) -fno-implicit-templates
+diff --git a/gcc/Makefile.in b/gcc/Makefile.in
+index b9e1858..2fc5aff 100644
+--- a/gcc/Makefile.in
++++ b/gcc/Makefile.in
+@@ -560,7 +560,7 @@ endif
+ 
+ # Options to use when compiling libgcc2.a.
+ #
+-LIBGCC2_DEBUG_CFLAGS = -g
++LIBGCC2_DEBUG_CFLAGS =
+ LIBGCC2_CFLAGS = -O2 $(LIBGCC2_INCLUDES) $(GCC_CFLAGS) $(TARGET_LIBGCC2_CFLAGS) \
+ 		 $(LIBGCC2_DEBUG_CFLAGS) $(GTHREAD_FLAGS) \
+ 		 -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED \
+diff --git a/gcc/configure.ac b/gcc/configure.ac
+index c952d2f..5362fb2 100644
+--- a/gcc/configure.ac
++++ b/gcc/configure.ac
+@@ -324,8 +324,8 @@ ACX_PROG_CC_WARNING_OPTS([-W -Wall -Wwrite-strings -Wstrict-prototypes \
+ ACX_PROG_CC_WARNING_OPTS([-Wc++-compat], [cxx_compat_warn])
+ ACX_PROG_CC_WARNING_OPTS([-Wold-style-definition \
+                           -Wmissing-format-attribute], [strict_warn])
+-ACX_PROG_CC_WARNING_ALMOST_PEDANTIC([-Wno-long-long -Wno-variadic-macros \
+-				     -Wno-overlength-strings], [strict_warn])
++#ACX_PROG_CC_WARNING_ALMOST_PEDANTIC([-Wno-long-long -Wno-variadic-macros \
++#				     -Wno-overlength-strings], [strict_warn])
+ ACX_PROG_CC_WARNINGS_ARE_ERRORS([manual], [strict_warn])
+ 
+ # The above macros do nothing if the compiler is not GCC.  However, the

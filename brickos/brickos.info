@@ -1,0 +1,7 @@
+PRGNAM="brickos"
+VERSION="0.9.0"
+HOMEPAGE="http://brickos.sourceforge.net/"
+DOWNLOAD="https://sourceforge.net/projects/brickos/files/latest/download"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
