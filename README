@@ -1,1 +1,7 @@
 All build scripts needed to have brickos up and running on Slack14.2.
+
+Dependencies:
+	ftp://ftp.gnu.org/gnu/gcc/gcc-4.3.1/gcc-4.3.1.tar.bz2
+	ftp://sourceware.org/pub/binutils/snapshots/binutils-2.15.96.tar.bz2
+	https://sourceforge.net/projects/brickos/files/brickos-devel/brickos-0.9.0/brickos-0.9.0.tar.gz
+
